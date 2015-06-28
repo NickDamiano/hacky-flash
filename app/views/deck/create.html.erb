@@ -1,4 +1,4 @@
-<form action="#">
+<%= form_tag('/create') do %>
   <div id='main_form'>
     <div id='card_set'>
       <label for='name'>Side A:</label>
@@ -9,9 +9,10 @@
     
     
   </div>
-  <button id='add_button'>Add </button>
   <%= submit_tag "Submit" %>
-</form>  
+<% end %>
+<button id='add_button'>Add </button>
+
 
 
 <script type="text/javascript">

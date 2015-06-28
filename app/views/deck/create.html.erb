@@ -1,0 +1,24 @@
+<form action="#">
+  <div id='main_form'>
+    <div id='card_set'>
+      <label for='name'>Side A:</label>
+      <input class='side_a'type='text' name='name' id='side_a' placeholder='The cheese is old and moldy' />
+      <label for='name'>Side B:</label>
+      <input class='side_b' type='text' name='name' id='side_b' placeholder='The cheese is old and moldy' />
+    </div>
+    
+    
+  </div>
+  <button id='add_button'>Add </button>
+  <%= submit_tag "Submit" %>
+</form>  
+
+
+<script type="text/javascript">
+	var new_card = $('#main_form').html()
+
+	$('#add_button').click(function(){
+  		$('#main_form').append(new_card);
+	})
+
+</script>

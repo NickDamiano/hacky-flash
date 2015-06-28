@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'deck#create'
-
+  post '/create' => 'deck#save'
   resources :deck
 
   # Example of regular route:

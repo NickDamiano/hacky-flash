@@ -6,6 +6,7 @@ class DeckController < ApplicationController
 
 	# when create is pressed - post request - ajax save?
 	def save
+		p params
 		# grab params - parse them - save them into database as json / hash
 		# redirect to study or back to create
 

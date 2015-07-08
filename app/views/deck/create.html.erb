@@ -1,25 +1,39 @@
+<button id='add_button'>Add </button>
 <%= form_tag('/create') do %>
-  <div id='main_form'>
-    <div id='card_set'>
-      <label for='name'>Side A:</label>
-      <input class='side_a'type='text' name='name' id='side_a' placeholder='The cheese is old and moldy' />
-      <label for='name'>Side B:</label>
-      <input class='side_b' type='text' name='name' id='side_b' placeholder='The cheese is old and moldy' />
-    </div>
-    
-    
-  </div>
+
+<div id="all_cards">
+  <%= text_field("deck", "name", :placeholder => 'Deck Name') %>
+  <div id="one_card">
+    <%= text_field("card", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button class="translate">Translate</button><button class="listen">Listen</button>
+  </div>  
+</div>
   <%= submit_tag "Submit" %>
 <% end %>
-<button id='add_button'>Add </button>
-
 
 
 <script type="text/javascript">
-	var new_card = $('#main_form').html()
 
+$(".translate").on('click', function(event){
+  console.log('auto translate');
+  alert('yo')
+  event.preventDefault();
+})
+
+$(".listen").on('click', function(event){
+  console.log('play sound');
+  event.preventDefault();
+})
+  // Initialize counter at 2 since the first card above starts at 1
+  var counter = 2
+
+  // Copy the card prototype above and increment the card name
 	$('#add_button').click(function(){
-  		$('#main_form').append(new_card);
+    card = $('#one_card').clone()
+    card.children().eq(0).attr('name', "card_"+counter+"[a]")
+    card.children().eq(1).attr('name', "card_"+counter+"[b]")
+    card.appendTo('#all_cards');
+    counter++
 	})
+
 
 </script>

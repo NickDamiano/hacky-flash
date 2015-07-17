@@ -16,6 +16,7 @@ class DeckController < ApplicationController
 	def study
 		# javascript looks in sessionStorage for cards and pulls them into the main deck, pops 5 into active deck and sets up triggerEvents
 		# When active and main are both empty, triggers redirect to review page
+		p params
 	end
 
 	def review

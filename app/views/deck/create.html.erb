@@ -3,11 +3,11 @@
 
 <div id="all_cards">
   <%= text_field("deck", "name", :placeholder => 'Deck Name') %>
-  <div id="one_card">
-    <%= text_field("card", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button class="translate">Translate</button><button class="listen">Listen</button>
+  <div id="one_card" class='card'>
+    <%= text_field("card_1", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button class="translate">Translate</button><button class="listen">Listen</button>
   </div>  
 </div>
-  <%= submit_tag "Submit" %>
+  <%= submit_tag "Submit", :id=> 'submit_button' %>
 <% end %>
 
 
@@ -32,8 +32,29 @@ $(".listen").on('click', function(event){
     card.children().eq(0).attr('name', "card_"+counter+"[a]")
     card.children().eq(1).attr('name', "card_"+counter+"[b]")
     card.appendTo('#all_cards');
+
     counter++
 	})
+
+  // Make a key event for tab button?
+
+  // Maybe make button to show/hide translation and sound buttons so you can 
+  // type out the one side for all and then go back through and add those
+  
+
+  $("#submit_button").on('click', function(event){
+    $('.card').each(function(i, value){
+      var card_a_id = $(value).children().eq(0).attr('id')
+      var card_a_val = $(value).children().eq(0).val()
+      var card_b_id = $(value).children().eq(1).attr('id')
+      var card_b_val = $(value).children().eq(1).val()
+      
+    })
+    // TODO iterate over the cards array
+    // Grab both sides and save them into variables
+    // save that into local storage inside the deck variable under card_1: {side_a: 'fart', side_b: 'pedo'}
+    // grab the next card and do the same thing
+  })
 
 
 </script>

@@ -1,10 +1,12 @@
+
 <button id='add_button'>Add </button>
+<button id='show_translate_button'>Show / Hide Translate button </button>
 <%= form_tag('/create') do %>
 
 <div id="all_cards">
   <%= text_field("deck", "name", :placeholder => 'Deck Name') %>
   <div id="one_card" class='card'>
-    <%= text_field("card_1", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button class="translate">Translate</button><button class="listen">Listen</button>
+    <%= text_field("card_1", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button type="button" class="translate">Translate</button><button type="button" class="listen">Listen</button>
   </div>  
 </div>
   <%= submit_tag "Submit", :id=> 'submit_button' %>
@@ -12,13 +14,30 @@
 
 
 <script type="text/javascript">
+// later it should look at the far left field, hit
+// the google translate api, and populate the closest field with the result
 
+$('#show_translate_button').on('click', function(event){
+  console.log('clicked')
+  if($('.translate').css('display')=='none'){
+    $('.translate').show();
+    $('.listen').show();
+    console.log('now visible')
+  }else{
+    $('.translate').hide();
+    $('.listen').hide();
+    console.log('now hidden')
+  }
+  
+})
 $(".translate").on('click', function(event){
   console.log('auto translate');
   alert('yo')
   event.preventDefault();
 })
 
+// later it should grab the second
+// field and call the google text to speech api and play the sound (based off language)
 $(".listen").on('click', function(event){
   console.log('play sound');
   event.preventDefault();
@@ -33,6 +52,7 @@ $(".listen").on('click', function(event){
     card.children().eq(1).attr('name', "card_"+counter+"[b]")
     card.appendTo('#all_cards');
 
+
     counter++
 	})
 
@@ -40,9 +60,12 @@ $(".listen").on('click', function(event){
 
   // Maybe make button to show/hide translation and sound buttons so you can 
   // type out the one side for all and then go back through and add those
-  
+
 
   $("#submit_button").on('click', function(event){
+    var deckname = $('#deck_name').val()
+    var deck = { deck_name: deckname,  cards: {} }
+
     $('.card').each(function(i, value){
       var card_a_id = $(value).children().eq(0).attr('id')
       var card_a_val = $(value).children().eq(0).val()

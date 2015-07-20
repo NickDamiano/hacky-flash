@@ -7,6 +7,7 @@ class DeckController < ApplicationController
 	# when create is pressed - post request - ajax save?
 	def save
 		p params
+		
 		redirect_to '/study'
 		# grab params - parse them - save them into database as json / hash
 		# redirect to study or back to create
@@ -16,7 +17,6 @@ class DeckController < ApplicationController
 	def study
 		# javascript looks in sessionStorage for cards and pulls them into the main deck, pops 5 into active deck and sets up triggerEvents
 		# When active and main are both empty, triggers redirect to review page
-		p params
 	end
 
 	def review

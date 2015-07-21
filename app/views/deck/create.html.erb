@@ -13,10 +13,13 @@
 <% end %>
 
 
-<script type="text/javascript">
-// later it should look at the far left field, hit
-// the google translate api, and populate the closest field with the result
 
+
+<script type="text/javascript">
+
+
+
+// Toggles the translate / listen buttons hidden visibile
 $('#show_translate_button').on('click', function(event){
   console.log('clicked')
   if($('.translate').css('display')=='none'){
@@ -30,39 +33,45 @@ $('#show_translate_button').on('click', function(event){
   }
   
 })
+
+// Translates the left column and puts it into the right column
 $(".translate").on('click', function(event){
   console.log('auto translate');
   alert('yo')
   event.preventDefault();
 })
 
-// later it should grab the second
-// field and call the google text to speech api and play the sound (based off language)
+// Does text to speech on the right column
 $(".listen").on('click', function(event){
   console.log('play sound');
   event.preventDefault();
 })
   // Initialize counter at 2 since the first card above starts at 1
   var counter = 2
-
-  // Copy the card prototype above and increment the card name
-	$('#add_button').click(function(){
+  var add_card = function(){
     card = $('#one_card').clone()
     card.children().eq(0).val("")
     card.children().eq(1).val("")
     card.children().eq(0).attr('name', "card_"+counter+"[a]")
     card.children().eq(1).attr('name', "card_"+counter+"[b]")
     card.appendTo('#all_cards');
-
-
     counter++
+  }
+
+  // Adds a new row when tab is pressed in the last textfield
+  $('body').on('keydown', 'input[type="text"]:last', function(e){
+  var keyCode = e.keyCode || e.which;
+  if(keyCode == 9){
+    add_card();
+  }
+})
+
+  // Copy the card prototype above and increment the card name
+	$('#add_button').click(function(){
+    add_card();
 	})
 
-  // Make a key event for tab button?
-
-  // type out the one side for all and then go back through and add those 
-
-
+  // Takes all cards and stores them into localstorage in a json string
   $("#submit_button").on('click', function(event){
     var deckname = $('#deck_name').val()
     var deck = { deck_name: deckname,  cards: {} }
@@ -82,10 +91,6 @@ $(".listen").on('click', function(event){
       // push the stuff into the object and add it to the other thing i'm tired
     })
     localStorage.setItem('main_deck', JSON.stringify(deck));
-    // TODO iterate over the cards array
-    // Grab both sides and save them into variables
-    // save that into local storage inside the deck variable under card_1: {side_a: 'fart', side_b: 'pedo'}
-    // grab the next card and do the same thing
   })
 
 

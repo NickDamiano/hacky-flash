@@ -48,6 +48,8 @@ $(".listen").on('click', function(event){
   // Copy the card prototype above and increment the card name
 	$('#add_button').click(function(){
     card = $('#one_card').clone()
+    card.children().eq(0).val("")
+    card.children().eq(1).val("")
     card.children().eq(0).attr('name', "card_"+counter+"[a]")
     card.children().eq(1).attr('name', "card_"+counter+"[b]")
     card.appendTo('#all_cards');

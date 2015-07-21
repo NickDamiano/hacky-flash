@@ -58,21 +58,28 @@ $(".listen").on('click', function(event){
 
   // Make a key event for tab button?
 
-  // Maybe make button to show/hide translation and sound buttons so you can 
-  // type out the one side for all and then go back through and add those
+  // type out the one side for all and then go back through and add those 
 
 
   $("#submit_button").on('click', function(event){
     var deckname = $('#deck_name').val()
     var deck = { deck_name: deckname,  cards: {} }
-
+    var count = 0;
     $('.card').each(function(i, value){
-      var card_a_id = $(value).children().eq(0).attr('id')
-      var card_a_val = $(value).children().eq(0).val()
-      var card_b_id = $(value).children().eq(1).attr('id')
-      var card_b_val = $(value).children().eq(1).val()
-      
+      var card_a_id = $(value).children().eq(0).attr('id');
+      var card_a_val = $(value).children().eq(0).val();
+      var card_b_id = $(value).children().eq(1).attr('id');
+      var card_b_val = $(value).children().eq(1).val();
+      // Set the values of the js object to the card
+      var card_set = { side_a: card_a_val, side_b: card_b_val }
+      // Store the js object for card into the deck["cards"] array with the counter
+      deck["cards"][count] = card_set
+      // increase the counter
+      count++
+      // create an empty object and assign it a name - var card_obj = {}
+      // push the stuff into the object and add it to the other thing i'm tired
     })
+    localStorage.setItem('main_deck', JSON.stringify(deck));
     // TODO iterate over the cards array
     // Grab both sides and save them into variables
     // save that into local storage inside the deck variable under card_1: {side_a: 'fart', side_b: 'pedo'}

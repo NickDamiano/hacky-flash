@@ -5,18 +5,18 @@ woof
 
 
 <script type="text/javascript">
-	// var i = 0, 
-	// oJson = {},
-	// sKey;
-	// for (; sKey = window.localStorage.key(i); i++){
-	// 	oJson[sKey] = window.localStorage.getItem(sKey);
-	// }
-	// console.log(oJson)
-
+	
+	// Grab the decks in local storage, create and append checklist to the page
     var card_array = JSON.parse(localStorage['all_decks'])
     for(var i = 0; i< card_array.length; i++){
-    	var deck = document.createElement('input')
-    	deck.setAttribute('type', 'checkbox')
+    	var deck = document.createElement('input');
+    	deck.type 	= 'checkbox';
+    	deck.id		= 'deck' + i 
 
+    	var label = document.createElement('label')
+    	label.htmlFor = 'deck' + 1
+    	label.appendChild(document.createTextNode(card_array[i]["deck_name"]))
+    	$('#deck_list').append(deck)
+    	$('#deck_list').append(label)
     }
 </script>

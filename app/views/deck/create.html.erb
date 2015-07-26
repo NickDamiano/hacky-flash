@@ -74,7 +74,7 @@ $(".listen").on('click', function(event){
   // Takes all cards and stores them into localstorage in a json string
   $("#submit_button").on('click', function(event){
     var deckname = $('#deck_name').val()
-    var deck = { deck_name: deckname,  cards: {} }
+    var deck = { deck_name: deckname,  cards: [] }
     var count = 0;
     $('.card').each(function(i, value){
       var card_a_id = $(value).children().eq(0).attr('id');

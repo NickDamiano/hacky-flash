@@ -90,10 +90,10 @@ $(".listen").on('click', function(event){
       // create an empty object and assign it a name - var card_obj = {}
       // push the stuff into the object and add it to the other thing i'm tired
     })
-    if(localStorage["decks"] == undefined){
+    if(localStorage["all_decks"] == undefined){
       card_array = []
     }else{
-      card_array = JSON.parse(localStorage['decks'])
+      card_array = JSON.parse(localStorage['all_decks'])
     }
     card_array.push(deck)
     localStorage.setItem('all_decks', JSON.stringify(card_array));

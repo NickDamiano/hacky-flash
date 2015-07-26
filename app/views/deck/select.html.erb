@@ -1,22 +1,67 @@
-woof
-
-<div id='deck_list'></div>
-
-
+<form>
+	<div id='deck_list'></div>
+	<%= submit_tag "Study!", :id=> 'submit_button' %>
+</form>
 
 <script type="text/javascript">
+	
+	// Add the cards to the study_deck
+	$('#submit_button').on('click', function(event){
+		var decksChosen = selectDecks();
+		combine_cards(decksChosen);
+	})
+
+	// Identify the checked boxes
+	var selectDecks = function(){
+		var selectedDecks = [];
+    	$('input:checkbox').each(function(i, value){
+    		if(value.checked){
+    			var name = $(value).next().text();
+    			selectedDecks.push(name);
+    		}
+    	})
+    	return selectedDecks;
+	}
+	
 	
 	// Grab the decks in local storage, create and append checklist to the page
     var card_array = JSON.parse(localStorage['all_decks'])
     for(var i = 0; i< card_array.length; i++){
+
+    	// Create the checkbox
     	var deck = document.createElement('input');
     	deck.type 	= 'checkbox';
     	deck.id		= 'deck' + i 
 
+    	// Create the label
     	var label = document.createElement('label')
     	label.htmlFor = 'deck' + 1
     	label.appendChild(document.createTextNode(card_array[i]["deck_name"]))
+
+    	// Create the line break
+    	var brk = document.createElement('br')
+
+    	// Append checkbox, label, and break
     	$('#deck_list').append(deck)
     	$('#deck_list').append(label)
+    	$('#deck_list').append(brk)
+    }
+
+    // Iterate through localStorage decks, check if they contain one of the checked values, push their card array into the master array
+    //    and flatten it afterwards
+    var combine_cards = function(decks){
+    	var allCards 	= [];
+    	var mergedCards = [];
+    	
+    	$(card_array).each(function(i, value){
+    		if(decks.indexOf(value["deck_name"]) > -1){
+    			allCards.push(value["cards"]);
+    		}
+    	})
+    	// Flatten array
+    	mergedCards = mergedCards.concat.apply(mergedCards, allCards);
+
+    	// Store array of card objects into localStorage
+    	localStorage.setItem('main_study_deck', JSON.stringify(mergedCards));
     }
 </script>

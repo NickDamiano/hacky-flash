@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'deck#create'
   post '/create' => 'deck#save'
   get '/select' => 'deck#select'
+  post '/select' => 'deck#start_study'
+  get '/study' => 'deck#study'
   resources :deck
 
   # Example of regular route:

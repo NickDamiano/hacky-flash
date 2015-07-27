@@ -1,7 +1,7 @@
-<form>
+<%= form_tag('/select') do %>
 	<div id='deck_list'></div>
 	<%= submit_tag "Study!", :id=> 'submit_button' %>
-</form>
+<% end %>
 
 <script type="text/javascript">
 	

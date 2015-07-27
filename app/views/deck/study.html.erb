@@ -1,2 +1,90 @@
-meow
+<div id = "study_deck"></div>
 
+
+<script type="text/javascript">
+	var main_deck = JSON.parse(localStorage["main_study_deck"]);
+	var active_deck = [];
+	var review_deck = [];
+
+	// Pull out 5 cards from the main deck and place them in active deck
+	active_deck = main_deck.slice(0, 5);
+
+	var current_card = active_deck[0];
+	var current_side = 'a';
+	var current_index = 0;
+
+	// Load the first card in the deck
+	$('#study_deck').text(current_card["side_a"]);
+
+	// Handlers for arrow keys
+	$(document).keydown(function(e){
+		switch(e.which) {
+			case 37: // left
+
+			console.log('left');
+			leftArrow();
+			break;
+
+			case 38: // up
+			console.log('up');
+			break;
+
+			case 39: //right
+			console.log('right');
+			rightArrow();
+			break;
+
+			case 40: //down
+			console.log('down')
+			break; 
+
+			default: return; // exit this handler for other keys
+		}
+		e.preventDefault();
+	})
+
+	var leftArrow = function(){
+		if(current_side == 'b'){
+			// Currently on side b and need to load side a
+			$('#study_deck').text(current_card["side_a"]);
+			current_side = 'a';
+
+		}else if(current_index != 0){
+			// it is on side a and we need to load the previous card
+			current_card = active_deck[current_index - 1];
+			current_side = 'b';
+			current_index = current_index - 1;
+			$('#study_deck').text(current_card["side_b"]);
+
+		}else if(current_index == 0){
+			//load the last card because the current one is the first card side a
+			current_index = active_deck.length - 1;
+			current_card = active_deck[current_index];
+			current_side = 'b';
+			$('#study_deck').text(current_card["side_b"]);
+		}
+	}
+
+	var rightArrow = function(){
+		if(current_side == 'a'){
+			// Currently on side a and need to load side b
+			$('#study_deck').text(current_card["side_b"]);
+			current_side = 'b';
+
+		}else if(current_index != active_deck.length - 1){
+			// it is on side b and we need to load the next card
+			current_card = active_deck[current_index + 1];
+			current_side = 'a';
+			current_index = current_index + 1;
+			$('#study_deck').text(current_card["side_a"]);
+
+		}else if(current_index == active_deck.length - 1){
+			//load the first card because the current one is the last card side b
+			current_card = active_deck[0];
+			current_side = 'a';
+			current_index = 0;
+			$('#study_deck').text(current_card["side_a"]);
+		}
+	}
+
+</script>

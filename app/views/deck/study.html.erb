@@ -7,7 +7,7 @@
 	var review_deck = [];
 
 	// Pull out 5 cards from the main deck and place them in active deck
-	active_deck = main_deck.slice(0, 5);
+	active_deck = main_deck.splice(0, 5);
 
 	var current_card = active_deck[0];
 	var current_side = 'a';
@@ -20,13 +20,16 @@
 	$(document).keydown(function(e){
 		switch(e.which) {
 			case 37: // left
-
 			console.log('left');
 			leftArrow();
 			break;
 
 			case 38: // up
 			console.log('up');
+			// upArrow won't run after the deck is empty
+			if(active_deck.length != 0){
+				upArrow();
+			}
 			break;
 
 			case 39: //right
@@ -42,6 +45,36 @@
 		}
 		e.preventDefault();
 	})
+
+	var upArrow = function(){
+		// pop the current card out of the active deck and into the review deck
+		review_deck.push(current_card);
+		active_deck.splice(current_index, 1);
+		// if the main deck still has cards, pop them into the main deck into the active deck
+		if(main_deck.length > 0){
+			active_deck.push(main_deck.pop());
+		}
+		// if the index is 0, load up the last card
+		if(active_deck.length == 0){
+			console.log('no more cards');
+			$('#study_deck').text('');
+			alert('no more cards');
+		}
+		else if(current_index == 0){
+			current_index = active_deck.length - 1;
+			current_card = active_deck[current_index];
+			$('#study_deck').text(current_card["side_a"]);
+		// if the length is 0, there are no more cards - the card from the main deck should be loaded before this check
+		// and then the review mode should fire off
+		}
+		// if the index isn't 0, load the previous card - later figure out if the cards are being move left or right and load 
+		// the previous one
+		else{
+			current_index = current_index - 1;
+			current_card = active_deck[current_index];
+			$('#study_deck').text(current_card["side_a"]);
+		}
+	}
 
 	var leftArrow = function(){
 		if(current_side == 'b'){

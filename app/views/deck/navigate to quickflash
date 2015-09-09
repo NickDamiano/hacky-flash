@@ -1,0 +1,53 @@
+navigate to quickflash
+click create
+auto puts cursor in first card
+type side a
+hit tab
+type side b
+hit tab (new row added)
+keep going until you hit the end
+
+OR
+
+navigate to quickflash
+click create
+auto puts cursor
+click show translation buttons 
+Optional - click translate on tab over and it will auto translate as you type (prob a bad idea because you're tabbing through and it replaces) through
+buttons appear
+type first side
+hit tab (possibly auto translates
+click translate to have google translate it
+click listen to hear it to make sure it's the right thing
+click the drop down on the second side to select the right translation or type it in yourself)
+
+-----
+To do Sunday
+	
+
+
+	assign the down key to pull down another card
+	maybe spacebar deletes the card
+	assign the number keys 1-5 or something like that to push that card into a 
+	   custom pile and create one if it doesn't exist (build out idea more)
+	when up key is pressed and card is discarded, automatically draw one from the main stack
+
+	create review 
+		once main deck and active deck are depleted, review mode starts
+		event is triggered and cards are placed in center
+		up puts it for review
+		down pulls it into discard pile
+		when deck is empty, event triggered and review is loaded into main deck
+		study goes back to normal
+		(how do you get keypress events to only bind during certain events?)
+
+later
+	make it so you can upload and download decks with csv excel
+	make it so you can log in and save decks
+	able to edit, merge, delete decks from the select page
+	styling!
+	security!
+	move javascript to appropriate files
+
+Look at sahids stuff
+buy an angular course and do one hour

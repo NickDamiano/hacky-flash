@@ -27,6 +27,7 @@ class DeckController < ApplicationController
 		# javascript finds review sessionstorage and loads it into javascript array pile - flip through cards and if you don't know it - 
 		#    save it to to be reviewed. pops it out into the to be reviewed deck(same name study parses). Once main deck is empty, trigger
 		#    redirect to study
+		
 	end
 
 	def select

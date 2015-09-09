@@ -35,16 +35,18 @@
 
     	// Create the label
     	var label = document.createElement('label')
-    	label.htmlFor = 'deck' + 1
+    	label.htmlFor = 'deck' + 1;
+    	var button = document.createElement('button')
     	label.appendChild(document.createTextNode(card_array[i]["deck_name"]))
 
     	// Create the line break
     	var brk = document.createElement('br')
 
     	// Append checkbox, label, and break
-    	$('#deck_list').append(deck)
-    	$('#deck_list').append(label)
-    	$('#deck_list').append(brk)
+    	$('#deck_list').append(deck);
+    	$('#deck_list').append(label);
+    	$('#deck_list').append(button);
+    	$('#deck_list').append(brk);
     }
 
     // Iterate through localStorage decks, check if they contain one of the checked values, push their card array into the master array

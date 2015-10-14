@@ -39,6 +39,7 @@
 
 			case 40: //down
 			console.log('down')
+			downArrow();
 			break; 
 
 			default: return; // exit this handler for other keys
@@ -50,10 +51,7 @@
 		// pop the current card out of the active deck and into the review deck
 		review_deck.push(current_card);
 		active_deck.splice(current_index, 1);
-		// if the main deck still has cards, pop them into the main deck into the active deck
-		if(main_deck.length > 0){
-			active_deck.push(main_deck.pop());
-		}
+		
 		// if the index is 0, load up the last card
 		if(active_deck.length == 0){
 			console.log('no more cards');
@@ -74,6 +72,17 @@
 			current_index = current_index - 1;
 			current_card = active_deck[current_index];
 			$('#study_deck').text(current_card["side_a"]);
+		}
+	}
+
+	var downArrow = function(){
+		// if the main deck still has cards, pop them into the main deck into the active deck
+		if(main_deck.length > 0){
+			active_deck.push(main_deck.pop());
+		}	
+
+		if(main_deck.length == 0){
+			alert('main deck is empty');
 		}
 	}
 

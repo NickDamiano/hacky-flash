@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+*{
+	box-sizing: border-box;
+	-moz-box-sizingi: border-box;
+}
+
 .side_a{
   width: 25em;
 }
@@ -15,4 +20,24 @@
 
 .listen{
 	display: none
+}
+
+#container {
+	height: 350px;
+	/*padding: 78px 0;*/
+	text-align: center;
+}
+
+#study_deck{
+  	background: white;
+	position: absolute;
+	width: 100%;
+	top: 0;
+
+	font: 45px/200px bold Helvetica, Arial, sans-serif;
+	text-align: center;
+
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }

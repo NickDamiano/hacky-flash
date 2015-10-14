@@ -9,6 +9,7 @@
 	// Pull out 5 cards from the main deck and place them in active deck
 	active_deck = main_deck.splice(0, 5);
 
+	//TODO remove this or call the loadCard() function
 	var current_card = active_deck[0];
 	var current_side = 'a';
 	var current_index = 0;
@@ -20,9 +21,11 @@
 	$(document).keydown(function(e){
 		switch(e.which) {
 			case 37: // left
-			console.log('left');
-			leftArrow();
-			break;
+			if(active_deck.length !== 0){
+				console.log('left');
+				leftArrow();
+				break;
+			}
 
 			case 38: // up
 			console.log('up');
@@ -33,9 +36,10 @@
 			break;
 
 			case 39: //right
-			console.log('right');
-			rightArrow();
-			break;
+			if(active_deck.length !=0){
+				console.log('right');
+				rightArrow();
+			}break;
 
 			case 40: //down
 			console.log('down')
@@ -47,17 +51,29 @@
 		e.preventDefault();
 	})
 
+	var loadCard = function(){
+		current_card = active_deck[0];
+		current_side = 'a';
+		current_index = 0;
+
+		// Load the first card in the deck
+		$('#study_deck').text(current_card["side_a"]);
+
+	}
+
 	var upArrow = function(){
 		// pop the current card out of the active deck and into the review deck
 		review_deck.push(current_card);
 		active_deck.splice(current_index, 1);
 		
 		// if the index is 0, load up the last card
-		if(active_deck.length == 0){
-			console.log('no more cards');
-			$('#study_deck').text('');
-			alert('no more cards');
+		if(active_deck.length == 0 && main_deck.length == 0){
+			$('#study_deck').text('No more cards');
 			//trigger review mode 
+		}
+		else if(active_deck.length == 0 && main_deck.length != 0){
+			$('#study_deck').text('active deck empty, please draw more cards')
+			current_card = null;
 		}
 		else if(current_index == 0){
 			current_index = active_deck.length - 1;
@@ -79,10 +95,11 @@
 		// if the main deck still has cards, pop them into the main deck into the active deck
 		if(main_deck.length > 0){
 			active_deck.push(main_deck.pop());
+			loadCard();
 		}	
 
 		if(main_deck.length == 0){
-			alert('main deck is empty');
+			$('#study_deck').text( current_card["side_a"] + 'Main deck is empty and all cards have been loaded')
 		}
 	}
 
@@ -109,6 +126,7 @@
 	}
 
 	var rightArrow = function(){
+		
 		if(current_side == 'a'){
 			// Currently on side a and need to load side b
 			$('#study_deck').text(current_card["side_b"]);

@@ -41,17 +41,28 @@
 			if(active_deck.length !=0){
 				console.log('right');
 				rightArrow();
-			}break;
+			}
+			break;
 
 			case 40: //down
 			console.log('down')
 			downArrow();
 			break; 
 
+			case 82: // r
+			console.log('r pressed')
+			returnCard();
 			default: return; // exit this handler for other keys
 		}
 		e.preventDefault();
 	})
+
+	var returnCard = function(){
+		main_deck.push(current_card);
+		active_deck.splice(current_index, 1);
+		$('#study_deck').text('Study deck is empty, please draw another card')
+		current_card = null;
+	}
 
 	var loadCard = function(){
 		current_card = active_deck[0];
@@ -109,10 +120,6 @@
 			active_deck.push(main_deck.pop());
 			loadCard();
 		}	
-
-		if(main_deck.length == 0){
-			$('#study_deck').text( current_card["side_a"] + 'Main deck is empty and all cards have been loaded')
-		}
 	}
 
 	var leftArrow = function(){

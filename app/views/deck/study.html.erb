@@ -1,5 +1,6 @@
-<div id="container"></div>
-<div id = "study_deck"></div>
+<div id="container">
+	<div id = "study_deck"></div>
+</div>
 
 
 <script type="text/javascript">
@@ -7,8 +8,8 @@
 	var active_deck = [];
 	var review_deck = [];
 
-	// Pull out 5 cards from the main deck and place them in active deck
-	active_deck = main_deck.splice(0, 5);
+	// Pull out 3 cards from the main deck and place them in active deck
+	active_deck = main_deck.splice(0, 3);
 
 	//TODO remove this or call the loadCard() function
 	var current_card = active_deck[0];
@@ -62,6 +63,8 @@
 
 	}
 
+	// create keypress function to return the present card back to the main deck
+
 	var upArrow = function(){
 		// pop the current card out of the active deck and into the review deck
 		review_deck.push(current_card);
@@ -70,7 +73,15 @@
 		// if the index is 0, load up the last card
 		if(active_deck.length == 0 && main_deck.length == 0){
 			$('#study_deck').text('No more cards');
-			//trigger review mode 
+			// trigger review mode 
+			// Put review guide in div below
+			// Load all cards back into active deck
+			// Set review flag
+			// add instructions inside trigger buttons that if up or down
+			// are pressed, up places the cards into the main deck, and 
+			// down pops the card out and discards it. 
+			// Set action in up and down arrows to load first three 
+			// 
 		}
 		else if(active_deck.length == 0 && main_deck.length != 0){
 			$('#study_deck').text('active deck empty, please draw more cards')

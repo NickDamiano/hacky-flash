@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/select' => 'deck#select'
   post '/select' => 'deck#start_study'
   get '/study' => 'deck#study'
+  get '/test' => 'deck#test'
   resources :deck
 
   # Example of regular route:

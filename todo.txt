@@ -1,0 +1,1 @@
+the id 'one_card' is cloned and then each card has the same id, but shouldn't we only have one id per element? Should this be a clone of the first element of a class called one_card?

@@ -38,5 +38,8 @@ class DeckController < ApplicationController
 		# redirect to study
 	end
 
+	def test
+	end
+
 
 end

@@ -1,1 +1,34 @@
 the id 'one_card' is cloned and then each card has the same id, but shouldn't we only have one id per element? Should this be a clone of the first element of a class called one_card?
+
+- add excel csv importer that takes it and populates local storage with the decks
+
+- figure out review mode
+
+- add a thing to convert the local storage into a csv file to be downloaded. 
+
+- review deck needs to be stringified and stored into local storage when it's time to review
+
+- possibly deck can be saved after review session 
+
+- needs to be a place where you manage all cards and delete the ones you don't want or add ones you do. 
+
+- Move Javascript into separate files (problem before was that - we only wanted certain javascript to load for certain pages)
+
+- rather than having to click each translate button, we should have one translate for all so you can either translate all or 1 at a time, or if the field on the right is not empty, it leaves that alone and translates the rest. 
+
+
+
+
+
+PHASE 1: initial decks selected for study and put into one big pile
+
+PHASE 2: student reviews cards until they feel good and the deck is empty. so it is supposed that they know all cards 
+
+PHASE 3: student reviews all the cards once more and divides them into two piles. pile 1 for cards they realize they don't know. pile 2 for cards they feel good about even after review that will not be studied again this session.
+
+PHASE 4: all cards have been filtered so we repeat phase 2 with the review cards being placed in the active deck
+
+PHASE 5: alternates again to phase 3 for review break
+
+once no more cards have been added into review mode, the study session ends. 
+

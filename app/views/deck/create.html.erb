@@ -15,11 +15,10 @@
 <% end %>
 
 
-
-
 <script type="text/javascript">
 
 // Toggles the translate / listen buttons hidden visibile
+// Should be some toggle code that makes this cleaner
 $('#show_translate_button').on('click', function(event){
   console.log('clicked')
   if($('.translate').css('display')=='none'){
@@ -54,13 +53,14 @@ $(".listen").on('click', function(event){
     card.children().eq(1).val("")
     card.children().eq(0).attr('name', "card_"+counter+"[a]")
     card.children().eq(1).attr('name', "card_"+counter+"[b]")
+    // TODO set attribute for ID here?
     card.appendTo('#all_cards');
     counter++
   }
 
   // Adds a new row when tab is pressed in the last textfield
   $('body').on('keydown', 'input[type="text"]:last', function(e){
-  var keyCode = e.keyCode || e.which;
+  var keyCode = e.keyCode || e.which; //how does this work
   if(keyCode == 9){
     add_card();
   }
@@ -77,6 +77,7 @@ $(".listen").on('click', function(event){
     var deck = { deck_name: deckname,  cards: [] }
     var count = 0;
     $('.card').each(function(i, value){
+      //another opportuninty to change card ID number
       var card_a_id = $(value).children().eq(0).attr('id');
       var card_a_val = $(value).children().eq(0).val();
       var card_b_id = $(value).children().eq(1).attr('id');

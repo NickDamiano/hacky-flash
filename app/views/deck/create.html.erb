@@ -7,7 +7,7 @@
 
 <div id="all_cards">
   <%= text_field("deck", "name", :placeholder => 'Deck Name') %>
-  <div id="one_card" class='card'>
+  <div id="card_1" class='card'>
     <%= text_field("card_1", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button type="button" class="translate">Translate</button><button type="button" class="listen">Listen</button>
   </div>  
 </div>
@@ -48,12 +48,14 @@ $(".listen").on('click', function(event){
   // Initialize counter at 2 since the first card above starts at 1
   var counter = 2
   var add_card = function(){
-    card = $('#one_card').clone()
+    card = $('#card_1').clone()
+    card.attr('id', "card_"+counter)
     card.children().eq(0).val("")
     card.children().eq(1).val("")
-    card.children().eq(0).attr('name', "card_"+counter+"[a]")
-    card.children().eq(1).attr('name', "card_"+counter+"[b]")
-    // TODO set attribute for ID here?
+    card.children().eq(0).attr('name', "card_"+counter+"a")
+    card.children().eq(1).attr('name', "card_"+counter+"b")
+    card.children().eq(0).attr('id', "card_"+counter+"a")
+    card.children().eq(1).attr('id', "card_"+counter+"b")
     card.appendTo('#all_cards');
     counter++
   }

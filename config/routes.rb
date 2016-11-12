@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/select' => 'deck#start_study'
   get '/study' => 'deck#study'
   get '/test' => 'deck#test'
+  post '/csv' => 'deck#process_csv'
   resources :deck
 
   # Example of regular route:

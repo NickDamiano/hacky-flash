@@ -1,7 +1,24 @@
+require 'csv'
+
 class DeckController < ApplicationController
 
 	def create
 
+	end
+
+	def process_csv
+		temp_file = params["CSV File"].tempfile 
+		@deck_name = params["CSV File"].original_filename[0...-4] #drops the .csv
+		@cards = []
+		CSV.foreach(temp_file) do |row| 
+			# Row looks like ["front", "back"]
+			card = {"side_a": "#{row[0]}", "side_b": "#{row[1]}"}
+			@cards.push(card)
+			# process into data structure and save into an instance variable?
+		end
+		# somehow call the storage here before redirecting
+		#{"deck_name":"First","cards":[{"side_a":"one","side_b":"uno"},{"side_a":"two","side_b":"dos"}]}
+		redirect_to '/select'
 	end
 
 	# when create is pressed - post request - ajax save?

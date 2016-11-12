@@ -1,11 +1,20 @@
 
-<button id='add_button'>Add </button>
-<button id='show_translate_button'>Show / Hide Translate button </button>
-
-
-<%= form_tag('/create') do %>
-
+<div>
+  <b>Upload a CSV file</b>
+  <%= form_tag({action: :process_csv}, multipart: true) do %>
+  <%= file_field_tag 'CSV File' %>
+    <%= submit_tag "Submit", :id=> 'submit_csv' %>
+<% end %>
+</div>
+<br>
+<%= hidden_field_tag 'csv_cards', @cards %>
+<!-- <div id="csv_cards" data-butt="<%= @cards %>"></div>
+ -->
 <div id="all_cards">
+  <b>Create a flashcard deck</b><br>
+  <button id='add_button'>Add </button>
+  <button id='show_translate_button'>Show / Hide Translate button </button>
+  <%= form_tag('/create') do %>
   <%= text_field("deck", "name", :placeholder => 'Deck Name') %>
   <div id="card_1" class='card'>
     <%= text_field("card_1", :a, :placeholder => 'Side A') %><%= text_field("card_1", :b, :placeholder => 'Side B') %><button type="button" class="translate">Translate</button><button type="button" class="listen">Listen</button>
@@ -13,7 +22,6 @@
 </div>
   <%= submit_tag "Submit", :id=> 'submit_button' %>
 <% end %>
-
 
 <script type="text/javascript">
 
@@ -73,13 +81,29 @@ $(".listen").on('click', function(event){
     add_card();
 	})
 
+  $("#submit_csv").on('click', function(event){
+    convert_csv();
+  })
+
+  // Converts CSV file to localstorage
+  var convert_csv = function(){
+    // var deck_name = @deck_name
+    var csv_cards = $('#csv_cards').data
+
+    var deck = { deck_name: deckname, cards: [] }
+
+    // for (var i = @cards.length - 1; i >= 0; i--) {
+    //   @cards[i]
+    // };
+  }
+
   // Takes all cards and stores them into localstorage in a json string
   $("#submit_button").on('click', function(event){
     var deckname = $('#deck_name').val()
     var deck = { deck_name: deckname,  cards: [] }
     var count = 0;
     $('.card').each(function(i, value){
-      //another opportuninty to change card ID number
+      // do the IDs matter? I'm 99% sure they do not because they are not in the localstorage
       var card_a_id = $(value).children().eq(0).attr('id');
       var card_a_val = $(value).children().eq(0).val();
       var card_b_id = $(value).children().eq(1).attr('id');
@@ -93,6 +117,7 @@ $(".listen").on('click', function(event){
       // create an empty object and assign it a name - var card_obj = {}
       // push the stuff into the object and add it to the other thing i'm tired
     })
+    // This should be called separately by both this function and the one for CSV file processing
     if(localStorage["all_decks"] == undefined){
       card_array = []
     }else{

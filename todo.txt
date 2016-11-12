@@ -1,4 +1,16 @@
+Fuck. I can see the @cards when i use byebug. but when i pull it from the data attribute
+using jquery it's an empty string. WHAT THE FUCKING FUCK. 
+
+Maybe it needs to redirect to a modify deck page at which point it can populate the page with the ruby and then after changes are done, it puts it into json into the localstorage:
+
+
+
+
 the id 'one_card' is cloned and then each card has the same id, but shouldn't we only have one id per element? Should this be a clone of the first element of a class called one_card?
+
+- make a view and load partials. so the view has the header with navigation bars on top. so we can select a different deck. create a new one etc. 
+
+- make routes for editing decks that one thing...where its like /deck/edit/123
 
 - add excel csv importer that takes it and populates local storage with the decks
 

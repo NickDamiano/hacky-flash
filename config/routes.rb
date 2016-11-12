@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   post '/select' => 'deck#start_study'
   get '/study' => 'deck#study'
   get '/test' => 'deck#test'
+  get '/review' => 'deck#review'
   resources :deck
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

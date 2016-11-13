@@ -28,6 +28,10 @@
 	text-align: center;
 }
 
+#active_count, #discard_count, #review_count, #main_count{
+	display:inline;
+}
+
 #study_deck{
   	background: white;
 	position: absolute;

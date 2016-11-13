@@ -1,16 +1,22 @@
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+
+	<b>Active Count:</b>
+	 <div id = 'active_count'></div>&nbsp
+	<b>Review Count:</b>
+	<div id = "review_count"></div>&nbsp
+	<b>Discard Count:</b>
+	<div id = 'discard_count'></div>&nbsp
+	<br>
+	
 	<div id = "study_deck"></div>
-</body>
-</html>
+
 
 <script type="text/javascript">
 	var active_deck = JSON.parse(localStorage["main_study_deck"]);
 	var review_deck = [];
 	var discard_deck = [];
+
+	// set the review count
+	updateCount();
 
 	if(active_deck.length == 0){
 		$('#study_deck').text('No more cards sucka! You done done it!')
@@ -58,6 +64,12 @@
 		}
 		e.preventDefault();
 	})
+
+	function updateCount(){
+		$('#review_count').text(review_deck.length)
+		$('#discard_count').text(discard_deck.length)
+		$('#active_count').text(active_deck.length)
+	}
 
 	var loadCard = function(){
 		current_card = active_deck[0];
@@ -109,6 +121,7 @@
 			current_card = active_deck[current_index];
 			$('#study_deck').text(current_card["side_a"]);
 		}
+		updateCount();
 	}
 
 	var downArrow = function(){
@@ -118,6 +131,7 @@
 		} else if(active_deck.length == 0){
 			study();
 		}
+		updateCount();
 
 	}
 

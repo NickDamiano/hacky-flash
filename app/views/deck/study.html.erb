@@ -1,4 +1,8 @@
-<div id="container">
+	<b>Main Deck:</b>
+	<div id = "main_count"></div>&nbsp
+	<b>Active Deck:</b>
+	 <div id = 'active_count'></div>
+	<div id="container">
 	<div id = "study_deck"></div>
 </div>
 
@@ -15,6 +19,8 @@
 	var current_card = active_deck[0];
 	var current_side = 'a';
 	var current_index = 0;
+
+	updateCount();
 
 	if(active_deck.length == 0){
 	$('#study_deck').text('No more cards sucka! You done done it!')
@@ -61,6 +67,11 @@
 		}
 		e.preventDefault();
 	})
+
+	function updateCount(){
+		$('#active_count').text(active_deck.length)
+		$('#main_count').text(main_deck.length)
+	}
 
 	// what the fuck is this for
 	var returnCard = function(){
@@ -120,6 +131,7 @@
 			current_card = active_deck[current_index];
 			$('#study_deck').text(current_card["side_a"]);
 		}
+		updateCount();
 	}
 
 	var downArrow = function(){
@@ -128,6 +140,7 @@
 			active_deck.push(main_deck.pop());
 			loadCard();
 		}	
+		updateCount();
 	}
 
 	var leftArrow = function(){

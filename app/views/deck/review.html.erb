@@ -1,1 +1,169 @@
-<h1>HI NECKKK</h1>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id = "study_deck"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+	var active_deck = JSON.parse(localStorage["main_study_deck"]);
+	var review_deck = [];
+	var discard_deck = [];
+
+	if(active_deck.length == 0){
+		$('#study_deck').text('No more cards sucka! You done done it!')
+	}
+
+	//TODO remove this or call the loadCard() function
+	var current_card = active_deck[0];
+	var current_side = 'a';
+	var current_index = 0;
+
+	// Load the first card in the deck
+	$('#study_deck').text(current_card["side_a"]);
+
+	// Handlers for arrow keys
+	$(document).keydown(function(e){
+		switch(e.which) {
+			case 37: // left
+			if(active_deck.length !== 0){
+				console.log('left');
+				leftArrow();
+				break;
+			}
+
+			case 38: // up
+			console.log('up');
+			// upArrow won't run after the deck is empty
+			if(active_deck.length != 0){
+				upArrow();
+			}
+			break;
+
+			case 39: //right
+			if(active_deck.length !=0){
+				console.log('right');
+				rightArrow();
+			}
+			break;
+
+			case 40: //down
+			console.log('down')
+			downArrow();
+			break; 
+
+			default: return; // exit this handler for other keys
+		}
+		e.preventDefault();
+	})
+
+	var loadCard = function(){
+		current_card = active_deck[0];
+		current_side = 'a';
+		current_index = 0;
+
+		// Load the first card in the deck
+		$('#study_deck').text(current_card["side_a"]);
+
+	}
+
+	// create keypress function to return the present card back to the main deck
+
+	var study = function(){
+		localStorage.setItem('main_study_deck', JSON.stringify(review_deck));
+		window.location.href = '/study'
+	}
+
+	var upArrow = function(){
+		// pop the current card out of the active deck and into the review deck
+		review_deck.push(current_card);
+		active_deck.splice(current_index, 1);
+		
+		// if the index is 0, load up the last card
+		if(active_deck.length == 0){
+			$('#study_deck').text('No more cards');
+			study();
+			// trigger review mode 
+			// Put review guide in div below
+			// Load all cards back into active deck
+			// Set review flag
+			// add instructions inside trigger buttons that if up or down
+			// are pressed, up places the cards into the main deck, and 
+			// down pops the card out and discards it. 
+			// Set action in up and down arrows to load first three 
+			// 
+		}
+		else if(current_index == 0){
+			current_index = active_deck.length - 1;
+			current_card = active_deck[current_index];
+			$('#study_deck').text(current_card["side_a"]);
+		// if the length is 0, there are no more cards - the card from the main deck should be loaded before this check
+		// and then the review mode should fire off
+		}
+		// if the index isn't 0, load the previous card - later figure out if the cards are being move left or right and load 
+		// the previous one
+		else {
+			current_index = current_index - 1;
+			current_card = active_deck[current_index];
+			$('#study_deck').text(current_card["side_a"]);
+		}
+	}
+
+	var downArrow = function(){
+		discard_deck.push(active_deck.pop());	
+		if(active_deck.length > 0){
+			loadCard();
+		} else if(active_deck.length == 0){
+			study();
+		}
+
+	}
+
+	var leftArrow = function(){
+		if(current_side == 'b'){
+			// Currently on side b and need to load side a
+			$('#study_deck').text(current_card["side_a"]);
+			current_side = 'a';
+
+		} else if(current_index != 0){
+			// it is on side a and we need to load the previous card
+			current_card = active_deck[current_index - 1];
+			current_side = 'b';
+			current_index = current_index - 1;
+			$('#study_deck').text(current_card["side_b"]);
+
+		}else if(current_index == 0){
+			//load the last card because the current one is the first card side a
+			current_index = active_deck.length - 1;
+			current_card = active_deck[current_index];
+			current_side = 'b';
+			$('#study_deck').text(current_card["side_b"]);
+		}
+	}
+
+	var rightArrow = function(){
+		
+		if(current_side == 'a'){
+			// Currently on side a and need to load side b
+			$('#study_deck').text(current_card["side_b"]);
+			current_side = 'b';
+
+		}else if(current_index != active_deck.length - 1){
+			// it is on side b and we need to load the next card
+			current_card = active_deck[current_index + 1];
+			current_side = 'a';
+			current_index = current_index + 1;
+			$('#study_deck').text(current_card["side_a"]);
+
+		}else if(current_index == active_deck.length - 1){
+			//load the first card because the current one is the last card side b
+			current_card = active_deck[0];
+			current_side = 'a';
+			current_index = 0;
+			$('#study_deck').text(current_card["side_a"]);
+		}
+	}
+
+</script>

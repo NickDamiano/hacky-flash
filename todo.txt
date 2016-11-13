@@ -1,4 +1,4 @@
-the id 'one_card' is cloned and then each card has the same id, but shouldn't we only have one id per element? Should this be a clone of the first element of a class called one_card?
+on review mode if i hit down first, and don't go left or right it dumps all other cards but starter card. 
 
 - add excel csv importer that takes it and populates local storage with the decks
 

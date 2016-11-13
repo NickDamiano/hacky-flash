@@ -16,6 +16,10 @@
 	var current_side = 'a';
 	var current_index = 0;
 
+	if(active_deck.length == 0){
+	$('#study_deck').text('No more cards sucka! You done done it!')
+	}
+
 	// Load the first card in the deck
 	$('#study_deck').text(current_card["side_a"]);
 
@@ -86,6 +90,7 @@
 		// if the index is 0, load up the last card
 		if(active_deck.length == 0 && main_deck.length == 0){
 			$('#study_deck').text('No more cards');
+			
 			window.location.href = '/review'
 			// trigger review mode 
 			// Put review guide in div below

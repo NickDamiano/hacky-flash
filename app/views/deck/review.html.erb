@@ -125,7 +125,8 @@
 	}
 
 	var downArrow = function(){
-		discard_deck.push(active_deck.pop());	
+		discard_deck.push(current_card);	
+		active_deck.splice(current_index, 1);		
 		if(active_deck.length > 0){
 			loadCard();
 		} else if(active_deck.length == 0){

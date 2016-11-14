@@ -62,11 +62,25 @@
 			case 82: // r
 			console.log('r pressed')
 			returnCard();
-			// what is going on here?
+			// pushes current card back into deck in case you draw too many
+
+			case 83: //s for shuffle
+			console.log('s pressed')
+			active_deck = shuffleCards(active_deck);
 			default: return; // exit this handler for other keys
 		}
 		e.preventDefault();
 	})
+
+	function shuffleCards(array){
+	    for (var i = array.length - 1; i > 0; i--) {
+	        var j = Math.floor(Math.random() * (i + 1));
+	        var temp = array[i];
+	        array[i] = array[j];
+	        array[j] = temp;
+    	}
+    return array;
+	}
 
 	function updateCount(){
 		$('#active_count').text(active_deck.length)
